@@ -1,0 +1,24 @@
+import java.util.List;
+import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
+
+public class Main {
+
+	public static void main(String[] args){
+        PyramidCSVDAO pDAO = new PyramidCSVDAO();
+        List<Pyramid> pyramids = pDAO.readPyramidsFromCSV("C:\\Users\\iti\\eclipse-workspace\\Day1_Pyramid\\src\\pyramids.csv");
+        for(Pyramid p:pyramids)
+        {
+        System.out.println(p.getPharaoh()+"  "+p.getModern_name()+"  "+p.getSite()+"  "+p.getHeight()+"  ");
+           }
+        
+        //Excersise 4
+        List<Double> heights = pyramids.stream().map(Pyramid -> Pyramid.getHeight()).collect(Collectors.toList());
+        System.out.println(heights);
+        double lowerQuartile = heights.stream().sorted().collect(toList()).get((int)(heights.size()* 1/4));
+        double median = heights.stream().sorted().collect(toList()).get((int)(heights.size()* 1/2));
+        double upperQuartile = heights.stream().sorted().collect(toList()).get((int)(heights.size()* 3/4));
+        System.out.println("lower Quartile is : "+lowerQuartile + " ,Median is : "+ median + " and upperQuartile is : " + upperQuartile );
+    }
+
+}
